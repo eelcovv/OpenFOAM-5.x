@@ -157,7 +157,15 @@ Foam::rhoThermo::~rhoThermo()
 
 Foam::tmp<Foam::volScalarField> Foam::rhoThermo::rho() const
 {
-    return rho_;
+    //    HJ return rho_;
+    return tmp<volScalarField>
+    (
+        new volScalarField
+        (
+             "rhoCopy",
+             rho_
+        )
+    );
 }
 
 
