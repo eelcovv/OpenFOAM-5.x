@@ -77,14 +77,14 @@ class cloudSolution
         //- Current cloud iteration
         label iter_;
 
-       //- write cloud every time step
-       label writeEvery_;
+        //- write cloud every time step
+        label writeEvery_;
 
-       //- write cloud after start time
-       scalar writeTimeStart_;
+        //- write cloud after start time
+        scalar writeTimeStart_;
 
-       //- write cloud before start time
-       scalar writeTimeEnd_;
+        //- write cloud before start time
+        scalar writeTimeEnd_;
 
         //- Particle track time
         scalar trackTime_;

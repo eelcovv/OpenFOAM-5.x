@@ -234,17 +234,18 @@ bool Foam::cloudSolution::canEvolve()
 
 bool Foam::cloudSolution::output() const
 {
-    return active_ && mesh_.time().writeTime();
-    return active_ && (
+    return 
+    active_ 
+    && (
             mesh_.time().outputTime() || 
-            (   (writeEvery_>0) && 
+            (   (writeEvery_ > 0) && 
                 (
                   (mesh_.time().timeIndex() % writeEvery_ == 0  ) &&
                   (mesh_.time().timeOutputValue() >= writeTimeStart_ ) &&
                   (mesh_.time().timeOutputValue() <= writeTimeEnd_   ) 
                )
             )
-           );
+       );
 
 
 }
