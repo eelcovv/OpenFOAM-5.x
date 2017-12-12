@@ -89,6 +89,21 @@ inline Foam::label Foam::cloudSolution::iter() const
 }
 
 
+inline Foam::label Foam::cloudSolution::writeEvery() const
+{
+    return writeEvery_;
+}
+
+inline Foam::scalar Foam::cloudSolution::writeTimeStart() const
+{
+    return writeTimeStart_;
+}
+
+inline Foam::scalar Foam::cloudSolution::writeTimeEnd() const
+{
+    return writeTimeEnd_;
+}
+
 inline Foam::label Foam::cloudSolution::nextIter()
 {
     return ++iter_;

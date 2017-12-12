@@ -231,6 +231,11 @@ void Foam::KinematicCloud<CloudType>::postEvolve()
 
     functions_.postEvolve();
 
+    if(solution_.writeEvery()>0 && solution_.output()) 
+    { 
+	    this->write();
+    }
+
     solution_.nextIter();
 
     if (this->db().time().writeTime())

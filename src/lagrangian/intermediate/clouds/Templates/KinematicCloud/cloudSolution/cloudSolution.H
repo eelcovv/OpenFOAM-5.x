@@ -77,6 +77,15 @@ class cloudSolution
         //- Current cloud iteration
         label iter_;
 
+       //- write cloud every time step
+       label writeEvery_;
+
+       //- write cloud after start time
+       scalar writeTimeStart_;
+
+       //- write cloud before start time
+       scalar writeTimeEnd_;
+
         //- Particle track time
         scalar trackTime_;
 
@@ -164,6 +173,15 @@ public:
 
             //- Return const access to the current cloud iteration
             inline label iter() const;
+
+            //- Return const access to the writeEvery 
+	    inline label writeEvery() const;
+
+	    //- Return const access to the writeTimeStart 
+	    inline scalar writeTimeStart() const;
+
+	    //- Return const access to the writeTimeEnd 
+	    inline scalar writeTimeEnd() const;
 
             //- Increment and return iter counter
             inline label nextIter();

@@ -41,6 +41,9 @@ Foam::cloudSolution::cloudSolution
     calcFrequency_(1),
     maxCo_(0.3),
     iter_(1),
+    writeEvery_(0),
+    writeTimeStart_(0.0),
+    writeTimeEnd_(1e9),
     trackTime_(0.0),
     coupled_(false),
     cellValueSourceCorrection_(false),
@@ -67,6 +70,9 @@ Foam::cloudSolution::cloudSolution
     calcFrequency_(cs.calcFrequency_),
     maxCo_(cs.maxCo_),
     iter_(cs.iter_),
+    writeEvery_(cs.writeEvery_),
+    writeTimeStart_(cs.writeTimeStart_),
+    writeTimeEnd_(cs.writeTimeEnd_),
     trackTime_(cs.trackTime_),
     coupled_(cs.coupled_),
     cellValueSourceCorrection_(cs.cellValueSourceCorrection_),
@@ -109,6 +115,9 @@ void Foam::cloudSolution::read()
 {
     dict_.lookup("transient") >> transient_;
     dict_.lookup("coupled") >> coupled_;
+    dict_.readIfPresent("writeEvery",writeEvery_); 
+    dict_.readIfPresent("writeTimeStart",writeTimeStart_);
+    dict_.readIfPresent("writeTimeEnd",writeTimeEnd_);
     dict_.lookup("cellValueSourceCorrection") >> cellValueSourceCorrection_;
     dict_.readIfPresent("maxCo", maxCo_);
 
@@ -226,6 +235,18 @@ bool Foam::cloudSolution::canEvolve()
 bool Foam::cloudSolution::output() const
 {
     return active_ && mesh_.time().writeTime();
+    return active_ && (
+            mesh_.time().outputTime() || 
+            (   (writeEvery_>0) && 
+                (
+                  (mesh_.time().timeIndex() % writeEvery_ == 0  ) &&
+                  (mesh_.time().timeOutputValue() >= writeTimeStart_ ) &&
+                  (mesh_.time().timeOutputValue() <= writeTimeEnd_   ) 
+               )
+            )
+           );
+
+
 }
 
 
