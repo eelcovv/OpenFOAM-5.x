@@ -42,9 +42,10 @@ export WM_PROJECT_VERSION=5.x
 #
 # Please set to the appropriate path if the default is not correct.
 #
-[ "$BASH" -o "$ZSH_NAME" ] && \
-export FOAM_INST_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/../.. && pwd -P) || \
-export FOAM_INST_DIR=$HOME/$WM_PROJECT
+#[ "$BASH" -o "$ZSH_NAME" ] && \
+#export FOAM_INST_DIR=$(cd $(dirname ${BASH_SOURCE:-$0})/../.. && pwd -P) || \
+export FOAM_INST_DIR=/opt/gompute/shared/centos/app/foam
+#export FOAM_INST_DIR=$HOME/$WM_PROJECT
 # export FOAM_INST_DIR=~$WM_PROJECT
 # export FOAM_INST_DIR=/opt/$WM_PROJECT
 # export FOAM_INST_DIR=/usr/local/$WM_PROJECT
@@ -58,7 +59,7 @@ export FOAM_INST_DIR=$HOME/$WM_PROJECT
 
 #- Compiler location:
 #    WM_COMPILER_TYPE= system | ThirdParty (OpenFOAM)
-export WM_COMPILER_TYPE=system
+export WM_COMPILER_TYPE=ThirdParty
 
 #- Compiler:
 #    WM_COMPILER = Gcc | Gcc48 ... Gcc62 | Clang | Icc
@@ -86,7 +87,7 @@ export WM_COMPILE_OPTION=Opt
 #- MPI implementation:
 #    WM_MPLIB = SYSTEMOPENMPI | OPENMPI | SYSTEMMPI | MPICH | MPICH-GM | HPMPI
 #               | MPI | FJMPI | QSMPI | SGIMPI | INTELMPI
-export WM_MPLIB=SYSTEMOPENMPI
+export WM_MPLIB=OPENMPI
 
 #- Operating System:
 #    WM_OSTYPE = POSIX | ???
@@ -173,6 +174,7 @@ _foamSource `$WM_PROJECT_DIR/bin/foamEtcFile config.sh/paraview`
 _foamSource `$WM_PROJECT_DIR/bin/foamEtcFile config.sh/ensight`
 _foamSource `$WM_PROJECT_DIR/bin/foamEtcFile config.sh/gperftools`
 
+export FOAMY_HEX_MESH=1
 if [ ! -z "$FOAMY_HEX_MESH" ]
 then
     _foamSource `$WM_PROJECT_DIR/bin/foamEtcFile config.sh/CGAL`
@@ -211,6 +213,6 @@ unset cleaned foamClean foamOldDirs
 
 # Source the bash completion file:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[ "$BASH" ] && . $WM_PROJECT_DIR/etc/config.sh/bash_completion
+. $WM_PROJECT_DIR/etc/config.sh/bash_completion
 
 #------------------------------------------------------------------------------

@@ -35,9 +35,10 @@
 #
 #------------------------------------------------------------------------------
 
-boost_version=boost-system
-cgal_version=cgal-system
-#cgal_version=CGAL-4.10
+#boost_version=boost-system
+boost_version=boost_1_55_0
+cgal_version=CGAL-4.8
+#cgal_version=cgal-system
 
 thirdPartyPath=$WM_THIRD_PARTY_DIR/platforms/$WM_ARCH$WM_COMPILER
 
